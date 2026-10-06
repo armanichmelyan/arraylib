@@ -39,6 +39,29 @@ int main() {
         assert(src[i] == src_copy[i]);
     }
 
+    // Медиана массива из одного элемента
+    int one[] = {42};
+    assert(close(arr_median(one, 1), 42.0));
+
+    // Медиана с отрицательными числами (нечётный и чётный размер)
+    int neg_odd[] = {-7, -1, -4};
+    assert(close(arr_median(neg_odd, 3), -4.0));
+    int neg_even[] = {-10, -2, -6, -4};
+    assert(close(arr_median(neg_even, 4), -5.0));
+
+    // Медиана с повторяющимися значениями
+    int dup[] = {3, 1, 3, 2, 3};
+    assert(close(arr_median(dup, 5), 3.0));
+
+    // Медиана с дробным результатом
+    int half[] = {1, 2};
+    assert(close(arr_median(half, 2), 1.5));
+
+    // Медиана больших значений: сумма двух средних не помещается в int,
+    // но вычисляется в double без переполнения
+    int big[] = {2000000000, 2000000000};
+    assert(close(arr_median(big, 2), 2000000000.0));
+
     // Произведение на маленьких значениях (без переполнения)
     int d[] = {1, 2, 3, 4};
     assert(arr_product(d, 4) == 24);
